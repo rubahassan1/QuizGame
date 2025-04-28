@@ -1,0 +1,29 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Apr 28, 2025, 5:46:16 PM
+    Author     : Ruba Hassan
+*/
+ /*
+  * Empty Stylesheet file.
+  */
+ 
+ .mainFxmlClass {
+ 
+     -fx-background-image: url("Questions.jpg");
+     -fx-background-size: 100%;
+     -fx-background-repeat: no-repeat;
+     -fx-background-position: center center;
+ }
+ #title{
+     -fx-background-color: transparent;
+     -fx-text-fill: white; /* Bright pink center */
+     -fx-effect: dropshadow(gaussian, #E03FD8, 15, 0.5, 0, 0);
+     -fx-font-size: 30px;
+     -fx-font-weight: bold;
+     -fx-font-family: "Ink Free";
+ }
+ 
+

@@ -1,0 +1,28 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+  -fx-background-image: url("background.jpg");
+  -fx-background-size: cover;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center center;
+  -fx-background-color: white;
+}
+
+#startBtn {
+  -fx-background-color: linear-gradient(to bottom, #00d4d4, #00aaaa);
+  -fx-background-radius: 10;
+  -fx-text-fill: white;
+  -fx-font-weight: bold;
+  -fx-font-size: 16px;
+  -fx-cursor: hand;
+  -fx-padding: 8 16 8 16;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 4, 0, 0, 2);
+}
+
+#startBtn:hover {
+  -fx-background-color: linear-gradient(to bottom, #00ffff, #00bbbb);
+  -fx-scale-x: 1.05;
+  -fx-scale-y: 1.05;
+}

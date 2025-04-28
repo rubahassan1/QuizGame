@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TopicsController">
+    <stylesheets>
+        <URL value="@topics.css" />
+    </stylesheets>
+   <children>
+      <!-- Title Label -->
+      <Label id="title" alignment="CENTER" layoutX="136.0" prefHeight="21.0" prefWidth="328.0" text="Choose a Topic">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      
+      <Label fx:id="Mathematics" alignment="CENTER" layoutX="126.0" layoutY="105.0" prefHeight="72.0" prefWidth="164.0" styleClass="topics" text="Mathematics" />
+      <Label fx:id="Geography" alignment="CENTER" layoutX="349.0" layoutY="223.0" prefHeight="72.0" prefWidth="164.0" styleClass="topics" text="Geography" />
+      <Label fx:id="History" alignment="CENTER" layoutX="126.0" layoutY="223.0" prefHeight="72.0" prefWidth="164.0" styleClass="topics" text="History" />
+      <Label fx:id="Science" alignment="CENTER" layoutX="349.0" layoutY="105.0" prefHeight="72.0" prefWidth="164.0" styleClass="topics" text="Science" />
+   </children>
+</AnchorPane>

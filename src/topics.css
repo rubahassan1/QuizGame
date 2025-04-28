@@ -1,0 +1,42 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+    -fx-background-image: url("Topics.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}
+
+#title{
+    -fx-background-color: transparent;
+    -fx-text-fill: white; /* Bright pink center */
+    -fx-effect: dropshadow(gaussian, #E03FD8, 15, 0.5, 0, 0);
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Ink Free";
+}
+
+.topics{
+    -fx-padding: 10px;             /* Add some padding inside the labels */
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-family: "Ink Free";
+    -fx-cursor: hand;
+}
+
+.topics:hover {
+    -fx-background-color: rgba(135, 205, 238, 0.3);
+    -fx-border-color: #87CDEE;
+    -fx-text-fill: #87CDEE;
+    
+}
+
+.topics:pressed {
+    -fx-background-color: rgba(135, 205, 238, 0.5); 
+    -fx-border-color: #5BB5DC; 
+    -fx-text-fill: #5BB5DC; 
+    -fx-translate-y: 2px; 
+}
