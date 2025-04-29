@@ -5,7 +5,11 @@
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+
+
 
 /**
  * FXML Controller class
@@ -13,12 +17,28 @@ import javafx.fxml.Initializable;
  * @author Ruba Hassan
  */
 public class QuestionController implements Initializable {
-
+    @FXML
+    private Label question;
+    
+    @FXML
+    private Label op1;
+    
+    @FXML
+    private Label op2;
+    
+    @FXML
+    private Label op3;
+    
+    @FXML
+    private Label op4;
+            
     /**
      * Initializes the controller class.
      */
     String topicName;
-    
+    int index;
+    int topic;
+    int selectedOption=0;
     Object[][] topics = {
             {"Mathematics", 
                 new String[][] {
@@ -65,7 +85,60 @@ public class QuestionController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         System.out.println("Initialized with topic "+topicName);
-    }    
+        setupQuestion();
+        setupOptionClicks();
+    }
+    
+    public void setupQuestion() {
+    if ("Science".equals(topicName)) topic = 1;
+    if ("History".equals(topicName)) topic = 2;
+    if ("Geography".equals(topicName)) topic = 3;
+
+    question.setText((index + 1) + ". " + ((String[][])topics[topic][1])[index][0]);
+    op1.setText(((String[][])topics[topic][1])[index][1]);
+    op2.setText(((String[][])topics[topic][1])[index][2]);
+    op3.setText(((String[][])topics[topic][1])[index][3]);
+    op4.setText(((String[][])topics[topic][1])[index][4]);
+}
+    
+    public void goToNext(){
+        if(selectedOption!=0){
+        if(index<((String[][])topics[topic][1]).length-1)
+            index++;
+        else
+            index=0;
+        setupQuestion();
+        op1.setStyle("");
+        op2.setStyle("");
+        op3.setStyle("");
+        op4.setStyle("");
+        selectedOption=0;
+        }
+    }
+    
+    private void setupOptionClicks() {
+    op1.setOnMouseClicked(e -> selectOption(op1));
+    op2.setOnMouseClicked(e -> selectOption(op2));
+    op3.setOnMouseClicked(e -> selectOption(op3));
+    op4.setOnMouseClicked(e -> selectOption(op4));
+    }
+    
+    public void selectOption(Label selected) {
+    // Reset style for all options
+    op1.setStyle("");
+    op2.setStyle("");
+    op3.setStyle("");
+    op4.setStyle("");
+
+    // Apply selected style
+    selected.setStyle("-fx-background-color: rgba(135, 206, 250, 0.5);");
+    
+    // Store selected option index
+    if (selected == op1) selectedOption = 1;
+    else if (selected == op2) selectedOption = 2;
+    else if (selected == op3) selectedOption = 3;
+    else if (selected == op4) selectedOption = 4;
+    }
     
 }
 
