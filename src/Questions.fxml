@@ -8,6 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@Question.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
+       <Label fx:id="timerLabel" layoutX="520.0" layoutY="23.0" text="00:10" textFill="white" />
        <Label id="title" layoutX="221.0" layoutY="23.0" text="Questions" />
       <Label fx:id="question" alignment="CENTER" layoutX="148.0" layoutY="129.0" prefHeight="35.0" prefWidth="373.0" text="Question is displayed here..." textFill="#99dfff">
          <font>

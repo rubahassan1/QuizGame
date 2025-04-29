@@ -8,6 +8,9 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
 
 
@@ -17,6 +20,12 @@ import javafx.scene.control.*;
  * @author Ruba Hassan
  */
 public class QuestionController implements Initializable {
+    @FXML
+    private Label timerLabel;
+
+    private Timeline timer;
+    private int timeRemaining = 30;
+    
     @FXML
     private Label question;
     
@@ -99,10 +108,10 @@ public class QuestionController implements Initializable {
     op2.setText(((String[][])topics[topic][1])[index][2]);
     op3.setText(((String[][])topics[topic][1])[index][3]);
     op4.setText(((String[][])topics[topic][1])[index][4]);
+    startTimer();
 }
     
     public void goToNext(){
-        if(selectedOption!=0){
         if(index<((String[][])topics[topic][1]).length-1)
             index++;
         else
@@ -113,7 +122,6 @@ public class QuestionController implements Initializable {
         op3.setStyle("");
         op4.setStyle("");
         selectedOption=0;
-        }
     }
     
     private void setupOptionClicks() {
@@ -140,5 +148,25 @@ public class QuestionController implements Initializable {
     else if (selected == op4) selectedOption = 4;
     }
     
+    private void startTimer() {
+    if (timer != null) {
+        timer.stop(); // Reset if already running
+    }
+
+    timeRemaining = 30;
+    timerLabel.setText("00:" + (timeRemaining < 10 ? "0" + timeRemaining : timeRemaining));
+
+    timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+        timeRemaining--;
+        timerLabel.setText("00:" + (timeRemaining < 10 ? "0" + timeRemaining : timeRemaining));
+
+        if (timeRemaining <= 0) {
+            timer.stop();
+            goToNext(); // Or disable options
+        }
+    }));
+    timer.setCycleCount(timeRemaining);
+    timer.play();
+}
 }
 
