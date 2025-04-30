@@ -1,0 +1,36 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+    -fx-background-image: url("score.jpg");
+    -fx-background-size: 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}
+
+#yourScore{
+    -fx-text-fill: white; /* Bright pink center */
+     -fx-effect: dropshadow(gaussian, #E03FD8, 15, 0.5, 0, 0);
+     -fx-font-size: 40px;
+     -fx-font-weight: bold;
+     -fx-font-family: "Ink Free";
+}
+
+#viewBtn {
+  -fx-background-color: #ffffff;
+  -fx-background-radius: 10;
+  -fx-text-fill: #000080;
+  -fx-font-weight: bold;
+  -fx-font-size: 14px;
+  -fx-cursor: hand;
+  -fx-padding: 8 16 8 16;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 128, 0.6), 6, 0.3, 0, 3);
+}
+
+#viewBtn:hover {
+  -fx-background-color: linear-gradient(to bottom, #cceeff, #99ddff);
+  -fx-scale-x: 1.05;
+  -fx-scale-y: 1.05;
+}
+

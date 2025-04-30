@@ -3,13 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 
@@ -40,6 +48,9 @@ public class QuestionController implements Initializable {
     
     @FXML
     private Label op4;
+    
+    @FXML
+    private Button next;
             
     /**
      * Initializes the controller class.
@@ -48,6 +59,10 @@ public class QuestionController implements Initializable {
     int index;
     int topic;
     int selectedOption=0;
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+    ArrayList<Object> answers=new ArrayList<>();
     Object[][] topics = {
             {"Mathematics", 
                 new String[][] {
@@ -95,6 +110,7 @@ public class QuestionController implements Initializable {
         // TODO
         System.out.println("Initialized with topic "+topicName);
         setupQuestion();
+        question.setWrapText(true);
         setupOptionClicks();
     }
     
@@ -108,14 +124,37 @@ public class QuestionController implements Initializable {
     op2.setText(((String[][])topics[topic][1])[index][2]);
     op3.setText(((String[][])topics[topic][1])[index][3]);
     op4.setText(((String[][])topics[topic][1])[index][4]);
+    if(index==((String[][])topics[topic][1]).length-1){
+        next.setText("Finish");
+    }
     startTimer();
 }
     
     public void goToNext(){
-        if(index<((String[][])topics[topic][1]).length-1)
-            index++;
-        else
-            index=0;
+        answers.add(new Object[] {selectedOption, 30 - timeRemaining});
+        try {
+            if (index < ((String[][]) topics[topic][1]).length - 1) {
+                index++;
+                setupQuestion();
+            } else {
+                calculateScore();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("Score.fxml"));
+        
+        // Pass the topicName directly to the controller constructor
+        loader.setController(new ScoreController(score));
+        root = loader.load();
+        scene = new Scene(root);
+        stage = (Stage) question.getScene().getWindow();
+        stage.setScene(scene);
+            }
+            op1.setStyle("");
+            op2.setStyle("");
+            op3.setStyle("");
+            op4.setStyle("");
+            selectedOption = 0;
+        } catch (IOException e) {
+            e.printStackTrace(); // Or handle the error properly with a popup
+        }
         setupQuestion();
         op1.setStyle("");
         op2.setStyle("");
@@ -168,5 +207,33 @@ public class QuestionController implements Initializable {
     timer.setCycleCount(timeRemaining);
     timer.play();
 }
+    double score=0;
+    private void calculateScore() {
+    for (int i = 0; i < answers.size(); i++) {
+        Object[] answer = (Object[]) answers.get(i);
+        int selectedOption = (int) answer[0];
+        int timeTaken = (int) answer[1];
+
+        // Retrieve the correct answer for the current question
+        String[][] currentTopic = (String[][]) topics[topic][1];
+        String correctAnswer = currentTopic[i][5];  // Correct answer is stored at index 5 (assuming 1-indexed options)
+
+        // Check if the selected answer is correct
+        if (selectedOption > 0 && selectedOption < 5 && currentTopic[i][selectedOption].equals(correctAnswer)) {
+            // The answer is correct, so add points (e.g., 10 points)
+            int questionScore = 10;
+
+            // Optionally, deduct points based on timeTaken (e.g., 1 point deducted for each second taken)
+            int timePenalty = timeTaken > 20 ? (timeTaken - 20) : 0;
+            questionScore = Math.max(0, questionScore - timePenalty);
+
+            // Accumulate score for each question
+            score += questionScore;
+        }
+    }
+    // Print the total score
+    System.out.println("Total Score: " + score);
+}
+
 }
 
