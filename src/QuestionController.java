@@ -209,31 +209,32 @@ public class QuestionController implements Initializable {
 }
     double score=0;
     private void calculateScore() {
+    String[][] currentTopic = (String[][]) topics[topic][1];
+    int totalQuestions = currentTopic.length;
+    double pointsPerQuestion = 100.0 / totalQuestions;
+
     for (int i = 0; i < answers.size(); i++) {
         Object[] answer = (Object[]) answers.get(i);
         int selectedOption = (int) answer[0];
         int timeTaken = (int) answer[1];
 
-        // Retrieve the correct answer for the current question
-        String[][] currentTopic = (String[][]) topics[topic][1];
-        String correctAnswer = currentTopic[i][5];  // Correct answer is stored at index 5 (assuming 1-indexed options)
+        String correctAnswer = currentTopic[i][5];
 
-        // Check if the selected answer is correct
-        if (selectedOption > 0 && selectedOption < 5 && currentTopic[i][selectedOption].equals(correctAnswer)) {
-            // The answer is correct, so add points (e.g., 10 points)
-            int questionScore = 10;
+        if (selectedOption > 0 && selectedOption < 5 &&
+            currentTopic[i][selectedOption].equals(correctAnswer)) {
+            
+            double timeFactor;
+            if (timeTaken <= 10) {
+                timeFactor = 1.0; // full score
+            } else if (timeTaken <= 20) {
+                timeFactor = 0.6; // medium score
+            } else {
+                timeFactor = 0.3; // low score
+            }
 
-            // Optionally, deduct points based on timeTaken (e.g., 1 point deducted for each second taken)
-            int timePenalty = timeTaken > 20 ? (timeTaken - 20) : 0;
-            questionScore = Math.max(0, questionScore - timePenalty);
-
-            // Accumulate score for each question
-            score += questionScore;
+            score += pointsPerQuestion * timeFactor;
         }
     }
-    // Print the total score
-    System.out.println("Total Score: " + score);
 }
-
 }
 
