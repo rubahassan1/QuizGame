@@ -22,6 +22,10 @@ public class NewFXMain extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Load the FXML file
+        int port = 20000;
+        String host = "127.0.0.1";
+        Client client=new Client();
+        client.connect(host, port);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML2.fxml"));
         AnchorPane root = loader.load();
         

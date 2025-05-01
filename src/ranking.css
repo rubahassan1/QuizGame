@@ -1,0 +1,9 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+    -fx-background-image: url("login.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;    
+}

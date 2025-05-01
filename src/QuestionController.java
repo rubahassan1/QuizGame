@@ -4,9 +4,11 @@
  */
 
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -55,6 +57,10 @@ public class QuestionController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    Scanner in=Client.getInput();
+    PrintStream out=Client.getOutput();
+    
+    String currentUser;
     String topicName;
     int index;
     int topic;
@@ -108,6 +114,7 @@ public class QuestionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        currentUser=LoginController.currentUser;
         System.out.println("Initialized with topic "+topicName);
         setupQuestion();
         question.setWrapText(true);
@@ -136,7 +143,7 @@ public class QuestionController implements Initializable {
             if (index < ((String[][]) topics[topic][1]).length - 1) {
                 index++;
                 setupQuestion();
-            } else {
+            } else { //finish
                 calculateScore();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("Score.fxml"));
         
@@ -235,6 +242,14 @@ public class QuestionController implements Initializable {
             score += pointsPerQuestion * timeFactor;
         }
     }
+    saveScore(currentUser,topicName,score);
 }
+    
+    public void saveScore(String username, String topic, double score){
+        //send score info to server
+        out.println(username);
+        out.println(topic);
+        out.println(score);
+    }
 }
 
