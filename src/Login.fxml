@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginController">
+    <stylesheets>
+        <URL value="@login.css" />
+    </stylesheets>
+   <children>
+      <Pane id="border" layoutX="89.0" layoutY="82.0" prefHeight="235.0" prefWidth="421.0">
+         <children>
+            <Button fx:id="login" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#pressBtn" prefHeight="36.0" prefWidth="211.0" text="Login">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Button fx:id="signup" layoutX="210.0" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#pressBtn" prefHeight="36.0" prefWidth="211.0" text="Signup">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <PasswordField layoutX="176.0" layoutY="153.0" prefHeight="36.0" prefWidth="198.0" />
+            <TextField layoutX="176.0" layoutY="103.0" prefHeight="36.0" prefWidth="198.0" />
+            <Label alignment="CENTER" layoutX="66.0" layoutY="107.0" prefHeight="28.0" prefWidth="99.0" text="Username" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="66.0" layoutY="157.0" prefHeight="28.0" prefWidth="99.0" text="Password" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label id="startTitle" layoutX="157.0" layoutY="14.0" text="Lets Get Started!" />
+      <Button id="submit" layoutX="205.0" layoutY="340.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="179.0" text="Submit" />
+   </children>
+</AnchorPane>
