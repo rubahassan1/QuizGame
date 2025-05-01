@@ -16,19 +16,53 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.PrintStream;
+import java.net.Socket;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 
-public class FXML2Controller {
+public class FXML2Controller implements Initializable{
+    
+    @FXML
+    private Label error;
 
     private Stage stage;
     private Scene scene;
     private Parent root;
-
+    
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }
     public void startButtonClicked(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("Topics.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+          try{
+            int port = 20000;
+            String host = "127.0.0.1";
+            Socket mySocket = new Socket(host, port);
+            Scanner key = new Scanner(System.in);
+            PrintStream outSocket = new PrintStream(mySocket.getOutputStream());
+            Scanner inSocket=new Scanner(mySocket.getInputStream());
+            outSocket.println("username");
+
+            String response = inSocket.nextLine();
+            if (response.equals("LOAD_TOPICS")){
+                Parent root = FXMLLoader.load(getClass().getResource("Topics.fxml"));
+                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            }
+            else{
+                error.setText("Username already exists!");
+            }
+          
+          } catch (IOException ex) {
+            System.out.println(ex);
+          }
     }
 }
 
