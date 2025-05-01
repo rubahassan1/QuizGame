@@ -247,9 +247,11 @@ public class QuestionController implements Initializable {
     
     public void saveScore(String username, String topic, double score){
         //send score info to server
+        out.println("saveScore");
         out.println(username);
         out.println(topic);
         out.println(score);
+        out.flush();
     }
 }
 

@@ -41,10 +41,10 @@ private Label Geography;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        Mathematics.setOnMouseClicked(event -> goToQuestionPage(Mathematics.getText()));
-        Science.setOnMouseClicked(event -> goToQuestionPage(Science.getText()));
-        History.setOnMouseClicked(event -> goToQuestionPage(History.getText()));
-        Geography.setOnMouseClicked(event -> goToQuestionPage(Geography.getText()));
+        Mathematics.setOnMouseClicked(event ->{Client.setTopic("Mathematics"); goToQuestionPage(Mathematics.getText());});
+        Science.setOnMouseClicked(event -> {Client.setTopic("Science"); goToQuestionPage(Science.getText());});
+        History.setOnMouseClicked(event -> {Client.setTopic("History"); goToQuestionPage(History.getText());});
+        Geography.setOnMouseClicked(event -> {Client.setTopic("Science"); goToQuestionPage(Geography.getText());});
     }    
     
     public void goToQuestionPage(String topicName){

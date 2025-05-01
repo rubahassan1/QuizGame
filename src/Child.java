@@ -10,6 +10,7 @@
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -65,10 +66,26 @@ public class Child extends Thread {
                     if (result.equals("Done")) break; // exit loop after success
                 }
             }
-            String username=inSocket.nextLine();
-            String topic=inSocket.nextLine();
-            double score=inSocket.nextDouble();
-            saveScore(username,topic,score);
+            while (true) {
+                if (!inSocket.hasNextLine()) break;
+                String command = inSocket.nextLine();
+
+                if (command.equals("saveScore")) {
+                    String username = inSocket.nextLine();
+                    String topic = inSocket.nextLine();
+                    double score = Double.parseDouble(inSocket.nextLine());
+                    saveScore(username, topic, score);
+                } else if (command.equals("getTop3")) {
+                    String requestedTopic = inSocket.nextLine();
+                    ArrayList<String> top = getTop3(requestedTopic);
+                    outSocket.println(top.size());
+                    for (String name : top) {
+                        outSocket.println(name);
+                    }
+                    outSocket.flush();
+                }
+            }
+            
         } catch (IOException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -113,9 +130,15 @@ public class Child extends Thread {
         topicToUserScores.put(topic,usersScore);
     }
     
-//    public static List<String[]> getTop3(String topic) {
-//        
-//    }
+    public static ArrayList<String> getTop3(String topic) {
+        ArrayList<String> top = new ArrayList<>();
+        HashMap<String,Double> topicUsers= topicToUserScores.get(topic);
+        for (String user : topicUsers.keySet()){
+            top.add(user);
+        }
+        top.sort((user1, user2) -> Double.compare(topicUsers.get(user2), topicUsers.get(user1)));
+        return new ArrayList<>(top.subList(0, Math.min(3, top.size())));
+    }
 
 }
 

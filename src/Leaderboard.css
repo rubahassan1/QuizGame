@@ -6,13 +6,17 @@
     -fx-background-color: white;
 }
 
-#leader {
+#topic, #leader {
     -fx-background-color: transparent;
      -fx-text-fill: white; /* Bright pink center */
      -fx-effect: dropshadow(gaussian, #E03FD8, 15, 0.5, 0, 0);
      -fx-font-size: 30px;
      -fx-font-weight: bold;
      -fx-font-family: "Ink Free";
+}
+
+#topic{
+    -fx-font-size: 20px;
 }
 
 #r1, #r2, #r3{
@@ -22,4 +26,9 @@
      -fx-font-size: 30px;
      -fx-font-weight: bold;
      -fx-font-family: "Ink Free";
+}
+
+#exit{
+    -fx-border-color: white;
+    -fx-cursor: hand;
 }

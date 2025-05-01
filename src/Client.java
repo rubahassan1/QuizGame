@@ -12,6 +12,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class Client {
+    private static String topic;
     private static Socket mysocket;
     private static Scanner in;
     private static PrintStream out;
@@ -31,8 +32,16 @@ public class Client {
     public static PrintStream getOutput() {
         return out;
     }
+    
+    public static void setTopic(String myTopic){
+        topic = myTopic;
+    }
+    
+    public static String getTopic(){
+        return topic;
+    }
 
-    public void close() throws Exception {
+    public static void close() throws Exception {
         mysocket.close();
     }
 }

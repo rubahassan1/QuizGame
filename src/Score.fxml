@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1">
     <stylesheets>
         <URL value="@score.css" />
     </stylesheets>
@@ -21,6 +21,6 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <Button id="viewBtn" layoutX="219.0" layoutY="324.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="161.0" text="View Leaderboard" />
+      <Button id="viewBtn" onAction="#viewRanking"  layoutX="219.0" layoutY="324.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="161.0" text="View Leaderboard" />
    </children>
 </AnchorPane>
