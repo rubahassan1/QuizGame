@@ -1,0 +1,25 @@
+.mainFxmlClass {
+    -fx-background-image: url("Login.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+    -fx-background-color: white;
+}
+
+#leader {
+    -fx-background-color: transparent;
+     -fx-text-fill: white; /* Bright pink center */
+     -fx-effect: dropshadow(gaussian, #E03FD8, 15, 0.5, 0, 0);
+     -fx-font-size: 30px;
+     -fx-font-weight: bold;
+     -fx-font-family: "Ink Free";
+}
+
+#r1, #r2, #r3{
+    -fx-background-color: transparent;
+     -fx-text-fill: white; /* Bright pink center */
+     -fx-effect: dropshadow(gaussian, #5BB5DC , 15, 0.5, 0, 0);
+     -fx-font-size: 30px;
+     -fx-font-weight: bold;
+     -fx-font-family: "Ink Free";
+}
