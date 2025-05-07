@@ -22,7 +22,7 @@ public class NewFXMain extends Application {
         String host = "127.0.0.1";
         Client client=new Client();
         client.connect(host, port);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML2.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml"));
         AnchorPane root = loader.load();
         
         // Create a scene with the root AnchorPane

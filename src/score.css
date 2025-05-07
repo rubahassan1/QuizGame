@@ -34,3 +34,7 @@
   -fx-scale-y: 1.05;
 }
 
+#exit{
+    -fx-border-color: white;
+    -fx-cursor: hand;
+}
