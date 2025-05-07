@@ -16,9 +16,7 @@ public class Client {
     private static Socket mysocket;
     private static Scanner in;
     private static PrintStream out;
-    int port = 20000;
-    String host = "127.0.0.1";
-
+    
     public void connect(String host, int port) throws Exception {
         mysocket = new Socket(host, port);
         in = new Scanner(mysocket.getInputStream());

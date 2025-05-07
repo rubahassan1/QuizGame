@@ -12,41 +12,30 @@ import java.io.PrintStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+
 
 public class Child extends Thread {
     public static HashMap<String, String> users=new HashMap<>();
     public static HashMap<String, HashMap<String, Double>> topicToUserScores = new HashMap<>();   // <topic,<username,score>>
     
     Socket clientSocket;
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
 
     public Child(Socket socket) {
         this.clientSocket = socket;
-        this.stage = stage;
     }
 
-    
 
+    @Override
     public void run() {
 
         try {
             Scanner inSocket = new Scanner(clientSocket.getInputStream());
             PrintStream outSocket = new PrintStream(clientSocket.getOutputStream());
             while (true) {
-                String response;
-                if (!inSocket.hasNextLine()) break;
-                response = inSocket.nextLine();
+                String response = inSocket.nextLine();
 
                 if (response.equals("login")) {
                     String username = inSocket.nextLine();
@@ -67,7 +56,6 @@ public class Child extends Thread {
                 }
             }
             while (true) {
-                if (!inSocket.hasNextLine()) break;
                 String command = inSocket.nextLine();
 
                 if (command.equals("saveScore")) {
@@ -93,11 +81,8 @@ public class Child extends Thread {
     
     
     public static String checkUser(String username, String password){
-        //if username not found return User not found
-        // if password incorrect return incorrect password
         if (users.containsKey(username)) {
             if (!users.get(username).equals(password)){
-                // Success: proceed to next scene
                 return "Incorrect Password";
             }
         } else {
