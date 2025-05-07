@@ -76,7 +76,7 @@ public class LoginController implements Initializable {
         return;
     }
 
-    Task<Void> task = new Task<>() {
+    Task<Void> task = new Task<Void>() {
         @Override
         protected Void call() {
             try {
