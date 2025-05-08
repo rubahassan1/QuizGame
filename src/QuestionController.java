@@ -120,20 +120,20 @@ public class QuestionController implements Initializable {
     }
     
     public void setupQuestion() {
-    if ("Science".equals(topicName)) topic = 1;
-    if ("History".equals(topicName)) topic = 2;
-    if ("Geography".equals(topicName)) topic = 3;
+        if ("Science".equals(topicName)) topic = 1;
+        if ("History".equals(topicName)) topic = 2;
+        if ("Geography".equals(topicName)) topic = 3;
 
-    question.setText((index + 1) + ". " + ((String[][])topics[topic][1])[index][0]);
-    op1.setText(((String[][])topics[topic][1])[index][1]);
-    op2.setText(((String[][])topics[topic][1])[index][2]);
-    op3.setText(((String[][])topics[topic][1])[index][3]);
-    op4.setText(((String[][])topics[topic][1])[index][4]);
-    if(index==((String[][])topics[topic][1]).length-1){
-        next.setText("Finish");
+        question.setText((index + 1) + ". " + ((String[][])topics[topic][1])[index][0]);
+        op1.setText(((String[][])topics[topic][1])[index][1]);
+        op2.setText(((String[][])topics[topic][1])[index][2]);
+        op3.setText(((String[][])topics[topic][1])[index][3]);
+        op4.setText(((String[][])topics[topic][1])[index][4]);
+        if(index==((String[][])topics[topic][1]).length-1){
+            next.setText("Finish");
+        }
+        startTimer();
     }
-    startTimer();
-}
     
     public void goToNext(){
         answers.add(new Object[] {selectedOption, 30 - timeRemaining});
@@ -145,12 +145,11 @@ public class QuestionController implements Initializable {
                 calculateScore();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("Score.fxml"));
         
-        // Pass the topicName directly to the controller constructor
-        loader.setController(new ScoreController(score));
-        root = loader.load();
-        scene = new Scene(root);
-        stage = (Stage) question.getScene().getWindow();
-        stage.setScene(scene);
+                loader.setController(new ScoreController(score));
+                root = loader.load();
+                scene = new Scene(root);
+                stage = (Stage) question.getScene().getWindow();
+                stage.setScene(scene);
             }
             op1.setStyle("");
             op2.setStyle("");
@@ -158,7 +157,7 @@ public class QuestionController implements Initializable {
             op4.setStyle("");
             selectedOption = 0;
         } catch (IOException e) {
-            e.printStackTrace(); // Or handle the error properly with a popup
+            e.printStackTrace(); 
         }
         setupQuestion();
         op1.setStyle("");
@@ -193,25 +192,25 @@ public class QuestionController implements Initializable {
     }
     
     private void startTimer() {
-    if (timer != null) {
-        timer.stop(); // Reset if already running
-    }
+        if (timer != null) {
+            timer.stop(); // Reset if already running
+        }
 
-    timeRemaining = 30;
-    timerLabel.setText("00:" + (timeRemaining < 10 ? "0" + timeRemaining : timeRemaining));
-
-    timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-        timeRemaining--;
+        timeRemaining = 30;
         timerLabel.setText("00:" + (timeRemaining < 10 ? "0" + timeRemaining : timeRemaining));
 
-        if (timeRemaining <= 0) {
-            timer.stop();
-            goToNext(); // Or disable options
-        }
-    }));
-    timer.setCycleCount(timeRemaining);
-    timer.play();
-}
+        timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+            timeRemaining--;
+            timerLabel.setText("00:" + (timeRemaining < 10 ? "0" + timeRemaining : timeRemaining));
+
+            if (timeRemaining <= 0) {
+                timer.stop();
+                goToNext(); 
+            }
+        }));
+        timer.setCycleCount(timeRemaining);
+        timer.play();
+    }
     double score=0;
     private void calculateScore() {
     String[][] currentTopic = (String[][]) topics[topic][1];
